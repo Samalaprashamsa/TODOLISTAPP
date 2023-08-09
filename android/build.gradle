@@ -1,0 +1,54 @@
+buildscript {
+    ext {
+        buildToolsVersion = "33.0.0"
+        minSdkVersion = 19 // Updated minSdkVersion to 19
+        compileSdkVersion = 33
+        targetSdkVersion = 33
+        ndkVersion = "23.1.7779620"
+    }
+    repositories {
+        google()
+        mavenCentral()
+        flatDir {
+            dirs 'lib'
+        }
+        flatDir {
+            dirs 'lib1', 'lib2'
+        }
+    }
+    dependencies {
+        dependencies {
+        classpath 'com.android.tools.build:gradle:4.2.2'
+        classpath 'com.google.gms:google-services:4.3.10'
+    }
+    }
+    project.ext.react = [
+        enableHermes: false,
+    ]
+}
+
+ext {
+    set('react-native', [
+        versions: [
+            // Overriding Build/Android SDK Versions
+            android: [
+                minSdk: 19, // Set the minSdk to 19
+                targetSdk: 33,
+                compileSdk: 33,
+            ],
+
+            // Overriding Library SDK Versions
+            firebase: [
+                // Override Firebase SDK Version
+                bom: "32.1.0"
+            ],
+        ],
+    ])
+}
+
+apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services' // Add this line
+
+android {
+    // Rest of your android configuration remains unchanged
+}

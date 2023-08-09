@@ -1,0 +1,75 @@
+apply plugin: "com.android.application"
+apply plugin: "com.facebook.react"
+apply plugin: "com.google.gms.google-services"
+
+android {
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    ndkVersion rootProject.ext.ndkVersion
+
+    compileSdkVersion rootProject.ext.compileSdkVersion
+
+    defaultConfig {
+        applicationId "com.todolistapp"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+    }
+
+    signingConfigs {
+        debug {
+            storeFile file('debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+    }
+
+    buildTypes {
+        debug {
+            signingConfig signingConfigs.debug
+        }
+        release {
+            // Caution! In production, you need to generate your own keystore file.
+            // see https://reactnative.dev/docs/signed-apk-android.
+            signingConfig signingConfigs.debug
+            minifyEnabled enableProguardInReleaseBuilds
+            proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+        }
+    }
+}
+
+dependencies {
+    // The version of react-native is set by the React Native Gradle Plugin
+    implementation 'com.google.firebase:firebase-messaging:23.0.0'
+
+    implementation "com.facebook.react:react-android"
+    implementation platform("com.google.firebase:firebase-bom:32.2.0")
+    implementation "com.google.firebase:firebase-analytics"
+
+    debugImplementation "com.facebook.flipper:flipper:0.93.0"
+    debugImplementation "com.facebook.flipper:flipper-network-plugin:0.93.0" {
+        exclude group: 'com.squareup.okhttp3', module: 'okhttp'
+    }
+    debugImplementation "com.facebook.flipper:flipper-fresco-plugin:0.93.0"
+
+    // You can keep the hermesEnabled configuration as it is in your original code
+    if (hermesEnabled.toBoolean()) {
+        implementation "com.facebook.react:hermes-android"
+    } else {
+        implementation jscFlavor
+    }
+}
+
+// Keep the rest of the code as it is in your original file
+
+apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle")
+applyNativeModulesAppBuildGradle(project)
+
+project.ext.react = [
+  enableHermes: false // Change this to true if you want to enable Hermes
+]
