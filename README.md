@@ -1,0 +1,1 @@
+![](https://www.google.com/url?sa=i&url=https%3A%2F%2Fhelpx.adobe.com%2Fphotoshop%2Fusing%2Fconvert-color-image-black-white.html&psig=AOvVaw0Z5K640agug8JqaApLbzgC&ust=1700996658243000&source=images&cd=vfe&ved=0CBIQjRxqFwoTCMCfncCA34IDFQAAAAAdAAAAABAE)
